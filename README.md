@@ -1,11 +1,15 @@
 # longitude
 Longitude Project for TiDB Hackathon 2022 !
 
-## 战队名 小宝突击队
-## 战队宣言 人和代码,有一个能跑就行!
-## 项目名: longitude
+## 战队名
+小宝突击队
+## 战队宣言
+人和代码,有一个能跑就行!
+## 项目名
+longitude
 ## 项目介绍
-翻翻老帖 (issue-6347)[https://github.com/pingcap/tidb/issues/6347]  (issue-673)[https://github.com/pingcap/tidb/issues/673#issuecomment-251132927] 
+翻翻老帖 https://github.com/pingcap/tidb/issues/6347 
+https://github.com/pingcap/tidb/issues/673#issuecomment-251132927
 时隔可能也就五六七八年吧,可怜的GISer至今也没等到一个Geo相关的支持. 
 
 小宝突击队决定试试,为Tidb添加地理数据支持.
