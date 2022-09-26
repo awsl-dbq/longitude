@@ -5,14 +5,16 @@ Longitude Project for TiDB Hackathon 2022 !
 ## 战队宣言 人和代码,有一个能跑就行!
 ## 项目名: longitude
 ## 项目介绍
-    翻翻老帖 https://github.com/pingcap/tidb/issues/6347  https://github.com/pingcap/tidb/issues/673#issuecomment-251132927 
-    时隔可能也就五六七八年吧,可怜的GISer至今也没等到一个Geo相关的支持. 小宝突击队决定试试,为Tidb添加地理数据支持.
-    马拉松如下计划:
-    1. GeoJSON 数据类型
-    2. 基于GeoJSON相关的地理分析函数支持
-    3. 最后,做个简单Demo
-    
-    突突突,开起我心爱的拖拉机,开run...
+翻翻老帖 (issue-6347)[https://github.com/pingcap/tidb/issues/6347]  (issue-673)[https://github.com/pingcap/tidb/issues/673#issuecomment-251132927] 
+时隔可能也就五六七八年吧,可怜的GISer至今也没等到一个Geo相关的支持. 
+
+小宝突击队决定试试,为Tidb添加地理数据支持.
+马拉松如下计划:
+1. GeoJSON 数据类型
+2. 基于GeoJSON相关的地理分析函数支持
+3. 最后,做个简单Demo
+
+突突突,开起我心爱的拖拉机,开run...
 
 ## 项目设计
 什么是GeoJSON?
@@ -71,14 +73,14 @@ mysql> select id,GeoJSON_TYPE(position) as 'geotype' from city_geo_table;
 ```
 
 2. GeoJSON_buffer
-
+    ...
 3. GeoJSON_union
-
+    ...
 4. GeoJSON_intersect
-
+    ...
 
 ### Demo Show
-
+.....
 
 
 ## 设计思路
