@@ -11,9 +11,9 @@ longitude
 Currently, TiDB do not support any Geo feature.To break this, Cat-Commando will try to add some Geo feature for TiDB.
 
 The plan show as follows:
-    1. add GeoJSON datatype
-    2. add some geographic analysis functions based on GeoJSON
-    3. build a demo
+  1. add GeoJSON datatype
+  2. add some geographic analysis functions based on GeoJSON
+  3. build a demo
 
 Okay, Fine, Here we Go!
 
@@ -66,7 +66,7 @@ mysql> desc city_geo_table;
 ```
 3. insert data
 ```
-mysql> INSERT INTO city_geo_table (id,position) VALUES (1, '{"name": "Beijing", "lng": 80,"lat":90}');
+mysql> INSERT INTO city_geo_table (id,position) VALUES (1, '{"type": "Feature","geometry": {"type": "Point","coordinates": [125.6, 10.1]},"properties": {"name": "Dinagat Islands"}}');
 Query OK, 1 row affected (0.01 sec)
 
 ```
@@ -76,7 +76,7 @@ mysql> select * from city_geo_table;
 +----+-------------------------------------------+
 | id | position                                  |
 +----+-------------------------------------------+
-|  1 | {"lat": 90, "lng": 80, "name": "Beijing"} |
+|  1 | {"type": "Feature","geometry": {"type": "Point","coordinates": [125.6, 10.1]},"properties": {"name": "Dinagat Islands"}} |
 +----+-------------------------------------------+
 1 row in set (0.00 sec)
 ```
@@ -90,7 +90,7 @@ mysql> select id,GeoJSON_TYPE(position) as 'geotype' from city_geo_table;
 +----+-------------------------------------------+
 | id | geotype                                  |
 +----+-------------------------------------------+
-|  1 | point                                    |
+|  1 | Point                                    |
 +----+-------------------------------------------+
 1 row in set (0.00 sec)
 ```
