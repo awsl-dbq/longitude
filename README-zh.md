@@ -1,49 +1,32 @@
-# Longitude
+# longitude
 Longitude Project for TiDB Hackathon 2022 !
 
-## Team Name
-Cat Commando
-## Team Slogan
-someone coding, someone run!
-## Project Name
+## 战队名
+小宝突击队
+## 战队宣言
+人和代码,有一个能跑就行!
+## 项目名
 longitude
-## Introduction
-Currently, TiDB do not support any Geo feature.To break this, Cat-Commando will try to add some Geo feature for TiDB.
+## 项目介绍
+翻翻老帖 https://github.com/pingcap/tidb/issues/6347 
+https://github.com/pingcap/tidb/issues/673#issuecomment-251132927
+时隔可能也就五六七八年吧,可怜的GISer至今也没等到一个Geo相关的支持. 
 
-The plan show as follows:
-    1. add GeoJSON datatype
-    2. add some geographic analysis functions based on GeoJSON
-    3. build a demo
+小宝突击队决定试试,为Tidb添加地理数据支持.
+马拉松如下计划:
+1. GeoJSON 数据类型
+2. 基于GeoJSON相关的地理分析函数支持
+3. 最后,做个简单Demo
 
-Okay, Fine, Here we Go!
+突突突,开起我心爱的拖拉机,开run...
 
-## Design
-### What's GeoJSON?
+## 项目设计
+什么是GeoJSON?
+
 JSON + Schema(GIS) => GeoJSON
-
-It's a standard data format for GIS data based on JSON.
-
-
-https://geojson.org/
-
-https://doc.arcgis.com/en/arcgis-online/reference/geojson.htm
-
-Example:
-```
-{
-  "type": "Feature",
-  "geometry": {
-    "type": "Point",
-    "coordinates": [125.6, 10.1]
-  },
-  "properties": {
-    "name": "Dinagat Islands"
-  }
-}
-```
-
-### add GeoJSON datatype
-Expected Input and output:
+在地理信息领域的标准JSON数据即GeoJSON.
+### 支持GeoJSON 数据类型
+预期输出
 1. create table
 ```
 mysql> CREATE TABLE city_geo_table (
@@ -81,9 +64,7 @@ mysql> select * from city_geo_table;
 1 row in set (0.00 sec)
 ```
 
-
-### geographic analysis functions based on GeoJSON
-
+### 基于GeoJSON相关的地理分析函数支持
 1. GeoJSON_TYPE
 ```
 mysql> select id,GeoJSON_TYPE(position) as 'geotype' from city_geo_table;
@@ -105,21 +86,21 @@ mysql> select id,GeoJSON_TYPE(position) as 'geotype' from city_geo_table;
 ### Demo Show
 .....
 
-## Why GeoJSON?
-....
 
-## Future Plan
-JSON is base datatype in Tidb now. GeoJSON is a particular datatype for a particular domain: GIS.
-However, we can try to create the domain specific datatype in runtime.
+## 设计思路
+1. 取舍之道
 
+
+## 未来计划
+JSON是Tidb目前基础支持的,GeoJSON其实是GIS特定领域的一个数据类型应用.
+其实我们可以尝试在运行时通过语句调用,创建特定领域数据类型.
 ```
 create domain GIS with schema 'gis.json.schema'; // geographic information system
-=> then we will support GeoJSON datatype in TiDB
+=> 系统会支持 GISJSON 类型数据
 create domain HIS with schema 'his.json.schema'; // hospital information system
-=> then we will support HisJSON datatype in TiDB
+=> 系统会支持 HISJSON 类型数据
 create domain FIS with schema 'fis.json.schema'; // finacial information system
-=> then we will support FisJSON datatype in TiDB
+=> 系统会支持 FISJSON 类型数据
 ```
 
-Of course, only domain specific datatype is not enough. we also need domain related functions.
-The UDF plugins may be a good choice.
+当然,光有数据类型是不够的,关键还要有领域相关函数.这部分功能当然要靠UDF来实现了.
