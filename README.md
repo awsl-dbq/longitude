@@ -90,23 +90,34 @@ mysql> select id,GeoJSON_TYPE(position) as 'geotype' from city_geo_table;
 +----+-------------------------------------------+
 | id | geotype                                  |
 +----+-------------------------------------------+
-|  1 | Point                                    |
+|  1 | "Point"                                    |
 +----+-------------------------------------------+
 1 row in set (0.00 sec)
 ```
 
 2. GeoJSON_buffer
-    ...
+```
+select id,GeoJSON_Buffer(position,10) from city_geo_table;
+```
+  
 3. GeoJSON_union
-    ...
+union by geotype
+```
+select GeoJSON_TYPE(position) as 'geotype',GeoJSON_union(position) from city_geo_table
+group by geotype
+```
 4. GeoJSON_intersect
-    ...
-
+```
+select GeoJSON_TYPE(position) as 'geotype',GeoJSON_intersect(position) from city_geo_table
+group by geotype
+```
 ### Demo Show
-.....
+To show on Hackathon online.
 
 ## Why GeoJSON?
-....
+- JSON is already supported by TiDB! GeoJSON stands on shoulders of it!
+- GeoJSON is string. It's much more common and easy to process. If you already have GeoData in your system, it's easy to migrate.
+- JSON functions is also available for GeoJSON.
 
 ## Future Plan
 JSON is base datatype in Tidb now. GeoJSON is a particular datatype for a particular domain: GIS.

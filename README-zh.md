@@ -47,11 +47,27 @@ mysql> desc city_geo_table;
 +----------+---------+------+------+---------+-------+
 2 rows in set (0.00 sec)
 ```
-3. insert data
+3. insert data with validation
 ```
-mysql> INSERT INTO city_geo_table (id,position) VALUES (1, '{"name": "Beijing", "lng": 80,"lat":90}');
-Query OK, 1 row affected (0.01 sec)
+; not pass
+mysql> INSERT INTO city_geo_table (id,position) VALUES (1, '{"name": "Beijing", "population": 100}');
+ERROR 1105 (HY000): GeoJson is  not valid
 
+; pass 
+
+mysql> INSERT INTO city_geo_table (id,position) VALUES (121, '
+    '> {
+    '>   "type": "Feature",
+    '>   "geometry": {
+    '>     "type": "Point",
+    '>     "coordinates": [125.6, 10.1]
+    '>   },
+    '>   "properties": {
+    '>     "name": "Dinagat Islands"
+    '>   }
+    '> }
+    '> ');
+Query OK, 1 row affected (0.08 sec)
 ```
 4. select data
 ```
@@ -59,7 +75,7 @@ mysql> select * from city_geo_table;
 +----+-------------------------------------------+
 | id | position                                  |
 +----+-------------------------------------------+
-|  1 | {"lat": 90, "lng": 80, "name": "Beijing"} |
+|  121 | {"geometry": {"coordinates": [125.6, 10.1], "type": "Point"}, "properties": {"name": "Dinagat Islands"}, "type": "Feature"} |
 +----+-------------------------------------------+
 1 row in set (0.00 sec)
 ```
@@ -71,25 +87,38 @@ mysql> select id,GeoJSON_TYPE(position) as 'geotype' from city_geo_table;
 +----+-------------------------------------------+
 | id | geotype                                  |
 +----+-------------------------------------------+
-|  1 | point                                    |
+|  121 | "Point"                                    |
 +----+-------------------------------------------+
 1 row in set (0.00 sec)
 ```
 
 2. GeoJSON_buffer
-    ...
+```
+select id,GeoJSON_Buffer(position,10) from city_geo_table;
+```
+  
 3. GeoJSON_union
-    ...
+union by geotype
+```
+select GeoJSON_TYPE(position) as 'geotype',GeoJSON_union(position) from city_geo_table
+group by geotype
+```
+
 4. GeoJSON_intersect
-    ...
+```
+select GeoJSON_TYPE(position) as 'geotype',GeoJSON_intersect(position) from city_geo_table
+group by geotype
+```
 
 ### Demo Show
-.....
+在介绍时展示
 
 
 ## 设计思路
 1. 取舍之道
-
+- JSON 本来TiDB就支持,基于JSON去构建GeoJSON会非常方便
+- GeoJSON 说到底是字符串,更通用可维护.现有系统的地理相关数据很方便处理一下迁移到GeoJSON.
+- 原有JSON相关函数可复用
 
 ## 未来计划
 JSON是Tidb目前基础支持的,GeoJSON其实是GIS特定领域的一个数据类型应用.
