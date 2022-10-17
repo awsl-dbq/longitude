@@ -7,7 +7,16 @@ Cat Commando
 someone coding, someone run!
 ## Project Name
 longitude
-## Introduction
+
+## Notice
+Sorry, I didn't notice the rules changed this year.
+Coding ahead is not allowed this year.
+Sadly, I have already do some coding in National Holiday.
+To show the fairness, I need to update my RFC to new one before the Hackathon coding begin.
+
+To not change too much, I treat the origin RFC 's future plan as my new RFC's starts.  
+
+## Introduction (outdated)
 Currently, TiDB do not support any Geo feature.To break this, Cat-Commando will try to add some Geo feature for TiDB.
 
 The plan show as follows:
@@ -17,7 +26,9 @@ The plan show as follows:
 
 Okay, Fine, Here we Go!
 
-## Design
+
+
+## Design (outdated)
 ### What's GeoJSON?
 JSON + Schema(GIS) => GeoJSON
 
@@ -82,7 +93,7 @@ mysql> select * from city_geo_table;
 ```
 
 
-### geographic analysis functions based on GeoJSON
+### geographic analysis functions based on GeoJSON  (outdated)
 
 1. GeoJSON_TYPE
 ```
@@ -114,12 +125,12 @@ group by geotype
 ### Demo Show
 To show on Hackathon online.
 
-## Why GeoJSON?
+## Why GeoJSON? (outdated)
 - JSON is already supported by TiDB! GeoJSON stands on shoulders of it!
 - GeoJSON is string. It's much more common and easy to process. If you already have GeoData in your system, it's easy to migrate.
 - JSON functions is also available for GeoJSON.
 
-## Future Plan
+## Future Plan ,also Introduction of my new RFC
 JSON is base datatype in Tidb now. GeoJSON is a particular datatype for a particular domain: GIS.
 However, we can try to create the domain specific datatype in runtime.
 
@@ -134,3 +145,22 @@ create domain FIS with schema 'fis.json.schema'; // finacial information system
 
 Of course, only domain specific datatype is not enough. we also need domain related functions.
 The UDF plugins may be a good choice.
+
+## Design
+### What's JSON Schema?
+JSON Schema is a vocabulary that allows you to annotate and validate JSON documents.
+### Benefits
+- Describes your existing data format(s).
+- Provides clear human- and machine- readable documentation.
+- Validates data which is useful for:
+    - Automated testing.
+    - Ensuring quality of client submitted data.
+
+
+## Target
+Add JSON Schema support for TiDB's JSON datatype.
+
+So you can validate JSON data with it and ensuring  data quality in database level.
+
+### Demo Show
+To show on Hackathon online.
